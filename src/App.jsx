@@ -1,23 +1,42 @@
 import React from 'react';
 import TodoList from './components/TodoList';
 import Weather from './components/Weather';
+import Calendar from './components/Calendar';
+import Notes from './components/Notes';
 import './index.css';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-4">
-      <header className="w-full max-w-4xl text-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-800">My Dashboard</h1>
-        <p className="text-gray-600">Stay organized and check the weather at a glance.</p>
-      </header>
-      <main className="w-full max-w-4xl grid gap-8 md:grid-cols-2">
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Todo List</h2>
-          <TodoList />
+    <div className="h-screen bg-gray-100 p-8 font-sans">
+      <main className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
+
+        {/* Left Column: Calendar */}
+        <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Calendar</h2>
+          <div className="flex-grow">
+            <Calendar />
+          </div>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Current Weather</h2>
-          <Weather />
+
+        {/* Right Column: Stacked widgets */}
+        <div className="flex flex-col gap-8">
+
+          {/* Weather Widget */}
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <Weather />
+          </div>
+
+          {/* TodoList Widget */}
+          <div className="bg-white p-6 rounded-lg shadow-lg overflow-y-auto">
+            <TodoList />
+          </div>
+
+          {/* Notes Widget */}
+          <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col flex-grow">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Shared Notes</h2>
+            <Notes />
+          </div>
+
         </div>
       </main>
     </div>
