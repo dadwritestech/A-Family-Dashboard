@@ -1,16 +1,52 @@
-# React + Vite
+# A Family Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a web-based family dashboard application built with React.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   Shared calendar
+*   Weather forecast
+*   To-do list
+*   Shared notes
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+*   Node.js
+*   npm
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installation
+
+1.  Clone the repository:
+
+    ```sh
+    git clone https://github.com/your-username/a-family-dashboard.git
+    ```
+
+2.  Install the dependencies:
+
+    ```sh
+    npm install
+    ```
+
+3.  Create a `.env` file in the root of the project and add the following environment variables:
+
+    ```
+    REACT_APP_FIREBASE_API_KEY="YOUR_API_KEY"
+    REACT_APP_FIREBASE_AUTH_DOMAIN="YOUR_AUTH_DOMAIN"
+    REACT_APP_FIREBASE_PROJECT_ID="YOUR_PROJECT_ID"
+    REACT_APP_FIREBASE_STORAGE_BUCKET="YOUR_STORAGE_BUCKET"
+    REACT_APP_FIREBASE_MESSAGING_SENDER_ID="YOUR_MESSAGING_SENDER_ID"
+    REACT_APP_FIREBASE_APP_ID="YOUR_APP_ID"
+    REACT_APP_OPENWEATHERMAP_API_KEY="YOUR_OPENWEATHERMAP_API_KEY"
+    REACT_APP_GOOGLE_CALENDAR_ID="YOUR_GOOGLE_CALENDAR_ID"
+    ```
+
+4.  Start the development server:
+
+    ```sh
+    npm start
+    ```
+
+    The application will be available at `http://localhost:3000`.

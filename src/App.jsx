@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { auth } from './firebase/config';
+import { onAuthStateChanged } from 'firebase/auth';
+import Login from './components/Login';
 import TodoList from './components/TodoList';
 import Weather from './components/Weather';
 import Calendar from './components/Calendar';
@@ -6,6 +9,19 @@ import Notes from './components/Notes';
 import './index.css';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  if (!user) {
+    return <Login />;
+  }
+
   return (
     <div className="h-screen bg-gray-100 p-8 font-sans">
       <main className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">

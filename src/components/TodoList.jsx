@@ -5,37 +5,57 @@ import { db } from '../firebase/config';
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
       const tasksData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setTasks(tasksData);
+    }, (error) => {
+      setError('Error fetching tasks. Please try again later.');
+      console.error('Error fetching tasks:', error);
     });
     return () => unsubscribe();
   }, []);
 
   const addTask = async () => {
     if (newTask.trim() === '') return;
-    await addDoc(collection(db, 'tasks'), {
-      text: newTask,
-      completed: false,
-    });
-    setNewTask('');
+    try {
+      await addDoc(collection(db, 'tasks'), {
+        text: newTask,
+        completed: false,
+      });
+      setNewTask('');
+    } catch (error) {
+      setError('Error adding task. Please try again.');
+      console.error('Error adding task:', error);
+    }
   };
 
   const toggleComplete = async (task) => {
-    await updateDoc(doc(db, 'tasks', task.id), {
-      completed: !task.completed,
-    });
+    try {
+      await updateDoc(doc(db, 'tasks', task.id), {
+        completed: !task.completed,
+      });
+    } catch (error) {
+      setError('Error updating task. Please try again.');
+      console.error('Error updating task:', error);
+    }
   };
 
   const deleteTask = async (id) => {
-    await deleteDoc(doc(db, 'tasks', id));
+    try {
+      await deleteDoc(doc(db, 'tasks', id));
+    } catch (error) {
+      setError('Error deleting task. Please try again.');
+      console.error('Error deleting task:', error);
+    }
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-4 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">Todo List</h1>
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
       <div className="flex mb-4">
         <input
           type="text"

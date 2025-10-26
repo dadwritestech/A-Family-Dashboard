@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Calendar = () => {
-  const calendarId = 'YOUR_GOOGLE_CALENDAR_ID'; // Replace with your public Google Calendar ID
+  const calendarId = process.env.REACT_APP_GOOGLE_CALENDAR_ID; // Replace with your public Google Calendar ID
   const calendarSrc = `https://calendar.google.com/calendar/embed?src=${calendarId}&mode=MONTH&ctz=Europe/Berlin`;
 
   return (

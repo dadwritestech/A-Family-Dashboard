@@ -6,6 +6,7 @@ import debounce from 'lodash.debounce';
 const Notes = () => {
   const [note, setNote] = useState('');
   const [status, setStatus] = useState('Loading...');
+  const [error, setError] = useState(null);
 
   const docRef = doc(db, 'dashboard', 'sharedNote');
 
@@ -18,6 +19,7 @@ const Notes = () => {
       } catch (error) {
         console.error('Error saving note:', error);
         setStatus('Error');
+        setError('Error saving note. Please try again.');
       }
     }, 1000), // Save after 1 second of inactivity
     []
@@ -40,6 +42,7 @@ const Notes = () => {
       (error) => {
         console.error('Error fetching note:', error);
         setStatus('Error');
+        setError('Error fetching note. Please try again later.');
       }
     );
 
@@ -54,6 +57,7 @@ const Notes = () => {
 
   return (
     <div className="w-full h-full flex flex-col">
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
       <textarea
         value={note}
         onChange={handleChange}
